@@ -13,14 +13,14 @@ export const marcelo = {
   purpose:
     'Cuidar do seu carro com honestidade e transparência, explicando o porquê de cada serviço, para você decidir com confiança e retirar o carro no prazo.',
   story: [
-    'Mecânico é a profissão do pai do Marcelo, que ensinou o ofício aos filhos. Ele carrega essa tradição e a soma a uma visão de inovação: ferramentas atuais, diagnóstico eletrônico e uma conversa franca com o cliente.',
+    'Marcelo é herdeiro de um legado de dedicação, passado de pai para filho. Ele segue as tradições da família, honra o trabalho de quem veio antes e soma a isso uma visão de inovação: ferramentas atuais, diagnóstico eletrônico e uma conversa franca com o cliente.',
     'O que move o trabalho dele é simples: alegria no que faz e ganhar a confiança de quem chega explicando o porquê. No fim, ver o cliente sorrindo.',
   ],
 }
 
 export const oficina = {
   history:
-    'A oficina nasceu da tradição de família e hoje reúne mecânica, lataria e pintura no mesmo lugar. O foco é a manutenção preventiva seguindo o manual de fábrica, principalmente em carros de 2020 em diante, nacionais e importados como BMW, Audi e Volvo.',
+    'A oficina nasceu da tradição de família e segue honrando o trabalho de quem veio antes. Hoje reúne mecânica, lataria e pintura no mesmo lugar. O foco é a manutenção preventiva seguindo o manual de fábrica, principalmente em carros de 2020 em diante, nacionais e importados como BMW, Audi e Volvo.',
   mission:
     'Manter o seu carro em dia com serviço bem feito, prazo cumprido e explicação clara de cada etapa.',
   vision:
