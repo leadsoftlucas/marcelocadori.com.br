@@ -4,7 +4,7 @@ import { PinIcon } from './Icons'
 /** Endereço completo como link para o Google Maps (cai em texto simples se não houver link). */
 export default function Address({ location, className = '' }) {
   const a = site.address
-  const line = [a.street, [a.city, a.state].filter(Boolean).join(' - '), a.zip].filter(Boolean).join(', ')
+  const line = site.addressLine
   if (!line) return null
   return (
     <p className={`address ${className}`.trim()}>

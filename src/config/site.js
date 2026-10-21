@@ -63,6 +63,13 @@ export const site = {
     const ll = lat && lng ? `&ll=${lat},${lng}` : ''
     return `https://www.google.com/maps?q=${encodeURIComponent(q)}${ll}&z=16&hl=pt-BR&output=embed`
   },
+  /** Endereço em uma linha. Não repete a cidade se a variável da rua já a contém. */
+  get addressLine() {
+    const a = this.address
+    const streetHasCity = Boolean(a.street && a.city && a.street.toLowerCase().includes(a.city.toLowerCase()))
+    const cityState = streetHasCity ? '' : [a.city, a.state].filter(Boolean).join(' - ')
+    return [a.street, cityState, a.zip].filter(Boolean).join(', ')
+  },
   get place() {
     return city ? (state ? `${city}/${state}` : city) : ''
   },

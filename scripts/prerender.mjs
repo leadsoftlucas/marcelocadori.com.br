@@ -77,7 +77,7 @@ Sitemap: ${site.url}/sitemap.xml
 // 5) llms.txt ---------------------------------------------------------------------------------
 const contact = [
   site.whatsapp.enabled && `- WhatsApp: ${site.whatsapp.display} (https://wa.me/${site.whatsapp.number}) — canal principal para agendar`,
-  site.hasAddress && `- Endereço: ${[site.address.street, site.address.city, site.address.state, site.address.zip].filter(Boolean).join(', ')}`,
+  site.hasAddress && `- Endereço: ${site.addressLine}`,
   site.hours.text && `- Horário: ${site.hours.text}`,
   site.email && `- E-mail: ${site.email}`,
   site.social.instagram && `- Instagram: ${site.social.instagram}`,
