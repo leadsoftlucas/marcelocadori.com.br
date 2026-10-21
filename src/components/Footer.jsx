@@ -1,8 +1,9 @@
 import { site } from '../config/site'
 import SocialLinks from './SocialLinks'
 import Address from './Address'
+import { openPreferences } from '../scripts/consent'
 
-export default function Footer() {
+export default function Footer({ base = '' }) {
   const year = new Date().getFullYear()
   return (
     <footer className="footer">
@@ -12,11 +13,17 @@ export default function Footer() {
         <Address location="rodape" className="footer__address" />
         <SocialLinks location="rodape" labels className="social--footer" />
         <nav className="footer__nav" aria-label="Rodapé">
-          <a href="#servicos" title="Ver os serviços da oficina">Serviços</a>
-          <a href="#duvidas" title="Ler as dúvidas frequentes">Dúvidas</a>
-          <a href="#sobre-marcelo" title="Conhecer o mecânico Marcelo Cadori">Sobre o Marcelo</a>
-          <a href="#sobre-oficina" title="Conhecer a história, a missão e a visão da oficina">A oficina</a>
-          <a href="#como-chegar" title="Ver o endereço e o mapa da oficina">Como chegar</a>
+          <a href={`${base}#servicos`} title="Ver os serviços da oficina">Serviços</a>
+          <a href={`${base}#duvidas`} title="Ler as dúvidas frequentes">Dúvidas</a>
+          <a href={`${base}#sobre-marcelo`} title="Conhecer o mecânico Marcelo Cadori">Sobre o Marcelo</a>
+          <a href={`${base}#sobre-oficina`} title="Conhecer a história, a missão e a visão da oficina">A oficina</a>
+          <a href={`${base}#como-chegar`} title="Ver o endereço e o mapa da oficina">Como chegar</a>
+          <a href={site.privacyPath} title="Ler a política de privacidade e de cookies">Política de privacidade</a>
+          {site.analyticsEnabled && (
+            <button type="button" className="footer__linkbtn" onClick={openPreferences} title="Rever ou alterar a sua escolha sobre cookies de análise">
+              Preferências de cookies
+            </button>
+          )}
         </nav>
         <div className="footer__bottom">
           <p className="footer__copy" suppressHydrationWarning>© {year} {site.name}. Todos os direitos reservados.</p>

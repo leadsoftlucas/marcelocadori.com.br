@@ -5,6 +5,7 @@ export function homeMeta() {
   const where = site.place ? ` em ${site.place}` : ''
   return {
     path: '/',
+    preloadHero: true,
     title: `${site.name} | Mecânica, Lataria e Pintura${site.address.city ? ` em ${site.address.city}` : ''}`,
     description:
       `Oficina de mecânica, lataria e pintura${where} para carros nacionais e importados. ` +
@@ -26,5 +27,18 @@ export function homeMeta() {
       'mecânico de importados',
       site.address.city && `oficina mecânica ${site.address.city}`,
     ].filter(Boolean),
+  }
+}
+
+/** Política de Privacidade: indexável, sem JSON-LD do negócio e sem preload do hero. */
+export function privacyMeta() {
+  return {
+    path: '/politica-de-privacidade/',
+    title: `Política de Privacidade | ${site.name}`,
+    description: `Como o site de ${site.name} trata dados pessoais e cookies, em conformidade com a LGPD.`,
+    image: homeMeta().image,
+    keywords: [],
+    jsonld: false,
+    preloadHero: false,
   }
 }

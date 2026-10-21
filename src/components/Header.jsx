@@ -9,16 +9,16 @@ const links = [
   { href: '#como-chegar', label: 'Como chegar', hint: 'Ver o endereço e o mapa da oficina' },
 ]
 
-export default function Header() {
+export default function Header({ base = '' }) {
   return (
     <header className="header">
       <div className="container header__inner">
-        <a className="header__brand" href="#topo" aria-label="Marcelo Cadori — início" title="Marcelo Cadori: voltar ao topo da página">
+        <a className="header__brand" href={`${base}#topo`} aria-label="Marcelo Cadori — início" title="Marcelo Cadori: voltar ao topo da página">
           <img src="/images/logo-branco.webp" alt="Logotipo Marcelo Cadori, mecânica, lataria e pintura" title="Marcelo Cadori" width="640" height="126" />
         </a>
         <nav className="header__nav" aria-label="Principal">
           {links.map((l) => (
-            <a key={l.href} href={l.href} title={l.hint}>{l.label}</a>
+            <a key={l.href} href={`${base}${l.href}`} title={l.hint}>{l.label}</a>
           ))}
         </nav>
         <SocialLinks location="header" skip={['whatsapp']} className="social--header" />

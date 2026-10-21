@@ -1,5 +1,5 @@
 // Pós-build: pré-renderiza o React em HTML estático (SSG) e gera os arquivos de SEO/GEO.
-//   dist/index.html   → HTML completo (conteúdo + <head> com meta tags, Open Graph, JSON-LD, GTM)
+//   dist/index.html (+ dist/<rota>/index.html) → HTML completo (conteúdo + <head> com meta tags, Open Graph, JSON-LD)
 //   dist/404.html     → página de erro (GitHub Pages)
 //   dist/sitemap.xml  → mapa do site (com imagens)
 //   dist/robots.txt   → regras de rastreamento (inclui crawlers de IA liberados)
@@ -12,19 +12,24 @@ import { fileURLToPath } from 'node:url'
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = (f) => resolve(root, 'dist', f)
 
-const { render, site, services, faq, notOffered, homeMeta } = await import(
+const { render, paths, site, services, faq, notOffered, homeMeta } = await import(
   pathToFileURL(resolve(root, 'dist-server/entry-server.js')).href
 )
 
-// 1) HTML pré-renderizado ---------------------------------------------------------------------
-const template = await readFile(dist('index.html'), 'utf8')
-const { html, head, bodyStart } = render()
-const page = template
-  .replace('<!--app-head-->', head)
-  .replace('<!--app-body-start-->', bodyStart)
-  .replace('<!--app-html-->', html)
-if (page.includes('<!--app-')) throw new Error('Placeholder não substituído em index.html')
-await writeFile(dist('index.html'), page)
+// 1) HTML pré-renderizado (uma página por rota) ------------------------------------------------
+import { mkdir } from 'node:fs/promises'
+const template = await readFile(dist('index.html'), 'utf8') // lido uma vez, antes de sobrescrever
+for (const path of paths) {
+  const { html, head, bodyStart } = render(path)
+  const page = template
+    .replace('<!--app-head-->', head)
+    .replace('<!--app-body-start-->', bodyStart)
+    .replace('<!--app-html-->', html)
+  if (page.includes('<!--app-')) throw new Error(`Placeholder não substituído em ${path}`)
+  const file = path === '/' ? 'index.html' : `${path.slice(1)}index.html`
+  await mkdir(dirname(dist(file)), { recursive: true })
+  await writeFile(dist(file), page)
+}
 
 // 2) 404 --------------------------------------------------------------------------------------
 await writeFile(
@@ -42,17 +47,20 @@ await writeFile(
 const meta = homeMeta()
 const today = new Date().toISOString().slice(0, 10)
 const images = [meta.image.url, `${site.url}/images/hero-1920.webp`]
+const urlEntry = (path) => {
+  const home = path === '/'
+  return `  <url>
+    <loc>${site.url}${path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${home ? 'monthly' : 'yearly'}</changefreq>
+    <priority>${home ? '1.0' : '0.3'}</priority>${home ? '\n' + images.map((i) => `    <image:image><image:loc>${i}</image:loc></image:image>`).join('\n') : ''}
+  </url>`
+}
 await writeFile(
   dist('sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url>
-    <loc>${site.url}/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-${images.map((i) => `    <image:image><image:loc>${i}</image:loc></image:image>`).join('\n')}
-  </url>
+${paths.map(urlEntry).join('\n')}
 </urlset>
 `,
 )

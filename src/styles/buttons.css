@@ -21,6 +21,9 @@
 .btn--primary:hover,
 .btn--whatsapp:hover { background: var(--whatsapp-dark); }
 
+.btn--solid { background: var(--blue-600); color: #fff; }
+.btn--solid:hover { background: var(--blue-700); }
+
 .btn--outline { background: transparent; color: var(--blue-600); border-color: var(--blue-600); }
 .btn--outline:hover { background: var(--blue-600); color: #fff; }
 

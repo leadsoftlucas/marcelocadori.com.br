@@ -1,0 +1,19 @@
+/* Aviso de cookies (LGPD) */
+.consent {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80; /* acima do botão flutuante do WhatsApp (60) */
+  background: #fff;
+  color: var(--ink);
+  border-top: 3px solid var(--blue-600);
+  box-shadow: 0 -10px 30px -12px rgba(0, 26, 92, 0.35);
+}
+.consent__inner { display: grid; gap: 1rem; align-items: center; padding-block: 1.1rem; }
+@media (min-width: 800px) { .consent__inner { grid-template-columns: 1fr auto; gap: 2rem; } }
+.consent__title { margin: 0 0 0.25rem; font: 700 1.05rem var(--font-display); font-stretch: 105%; }
+.consent__text { margin: 0; font-size: 0.95rem; color: var(--ink-soft); }
+.consent__text a { color: var(--blue-600); font-weight: 600; text-underline-offset: 3px; }
+.consent__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.consent__actions .btn { min-width: 130px; flex: 1 1 130px; }

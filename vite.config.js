@@ -11,9 +11,9 @@ function devHtml() {
     configureServer(s) {
       server = s
     },
-    async transformIndexHtml(html) {
+    async transformIndexHtml(html, ctx) {
       const { render } = await server.ssrLoadModule('/src/entry-server.jsx')
-      const r = render()
+      const r = render((ctx && (ctx.originalUrl || ctx.path)) || '/')
       return html
         .replace('<!--app-head-->', r.head)
         .replace('<!--app-body-start-->', r.bodyStart)

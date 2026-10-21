@@ -11,6 +11,7 @@ Site institucional estático de **Marcelo Cadori**, mecânico: oficina de **mec�
 - **Pensado para LLMs (GEO):** `robots.txt` liberando crawlers de IA (GPTBot, ClaudeBot, PerplexityBot…) e `llms.txt` com resumo do negócio em Markdown.
 - **Efeitos de rolagem:** blocos que surgem ao rolar, parallax sutil, barra de progresso e destaque do menu. Respeitam `prefers-reduced-motion` e não escondem conteúdo do HTML pré-renderizado.
 - **Acessibilidade:** `alt` descritivo em todas as imagens, `title` (hint) em botões e links, HTML semântico e links diretos (`#âncoras`) em todos os subtítulos.
+- **LGPD:** aviso de cookies (Aceitar/Recusar) e página `/politica-de-privacidade/`. O GTM/GA só é carregado depois do aceite do visitante, então não há cookies nem scripts do Google antes disso.
 - **Analytics:** Google Tag Manager (ou GA4 direto) e eventos de conversão (`whatsapp_click`, `section_view`…).
 - **Performance e acessibilidade:** imagens WebP com dimensões, fontes auto-hospedadas, CSS de poucos KB, HTML semântico, sem dependências de terceiros em tempo de execução além do GTM.
 - **Sem dados sensíveis no repositório:** telefone, endereço e IDs de analytics entram por variáveis de ambiente.

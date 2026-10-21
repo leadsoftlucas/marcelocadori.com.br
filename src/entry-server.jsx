@@ -4,17 +4,20 @@ import { site } from './config/site'
 import { services, notOffered } from './content/services'
 import { faq } from './content/faq'
 import { buildHead, buildBodyStart } from './seo/head'
-import { homeMeta } from './seo/meta'
+import { homeMeta, privacyMeta } from './seo/meta'
+import { routes, resolveRoute } from './routes'
 
-/** Usado em build (scripts/prerender.mjs) e no dev (vite.config.js). */
-export function render() {
-  const page = homeMeta()
+/** Usado em build (scripts/prerender.mjs) e no dev (vite.config.js). Renderiza uma rota. */
+export function render(path = '/') {
+  const { meta } = resolveRoute(path)
   return {
-    html: renderToString(<App />),
-    head: buildHead(page),
+    html: renderToString(<App path={path} />),
+    head: buildHead(meta()),
     bodyStart: buildBodyStart(),
   }
 }
 
-// Dados expostos ao script de build para gerar sitemap.xml, robots.txt e llms.txt.
-export { site, services, faq, notOffered, homeMeta }
+// Dados expostos ao script de build para gerar páginas, sitemap, robots.txt e llms.txt.
+export const paths = Object.keys(routes)
+export const pageMeta = (path) => resolveRoute(path).meta()
+export { site, services, faq, notOffered, homeMeta, privacyMeta, routes }

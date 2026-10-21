@@ -6,36 +6,22 @@ const esc = (s = '') =>
 
 const meta = (attrs) => `<meta ${Object.entries(attrs).map(([k, v]) => `${k}="${esc(v)}"`).join(' ')} />`
 
-/** Snippet oficial do GTM (head). Se só houver GA4, usa gtag.js direto. */
-function analyticsHead() {
-  const { gtmId, gaId } = site.analytics
-  if (gtmId) {
-    return `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${esc(gtmId)}');</script>`
-  }
-  if (gaId) {
-    return `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(gaId)}"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${esc(gaId)}');</script>`
-  }
-  return ''
-}
-
-/** <noscript> do GTM, logo após <body>. */
-export function buildBodyStart() {
-  const { gtmId } = site.analytics
-  return gtmId
-    ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${esc(gtmId)}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`
-    : ''
-}
+/**
+ * Analytics NÃO entra no HTML: o GTM/GA só carrega no navegador depois que o visitante aceita os
+ * cookies (src/scripts/consent.js), em conformidade com a LGPD. Por isso não há snippet no <head>
+ * nem <noscript> do GTM (o noscript carregaria o Google sem consentimento).
+ */
+export const buildBodyStart = () => ''
 
 /** Todas as tags do <head> (SEO, social, ícones, preload, JSON-LD, analytics). */
 export function buildHead(page) {
   const url = `${site.url}${page.path}`
-  const jsonLd = JSON.stringify(buildJsonLd(page)).replace(/</g, '\\u003c')
+  const jsonLd = page.jsonld === false ? '' : JSON.stringify(buildJsonLd(page)).replace(/</g, '\\u003c')
   const hasGeo = site.address.lat && site.address.lng
   const tags = [
     `<title>${esc(page.title)}</title>`,
     meta({ name: 'description', content: page.description }),
-    meta({ name: 'keywords', content: page.keywords.join(', ') }),
+    page.keywords?.length > 0 && meta({ name: 'keywords', content: page.keywords.join(', ') }),
     meta({ name: 'author', content: site.name }),
     meta({ name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' }),
     meta({ name: 'googlebot', content: 'index, follow' }),
@@ -80,10 +66,8 @@ export function buildHead(page) {
     // Descoberta por LLMs
     '<link rel="alternate" type="text/markdown" title="Resumo para LLMs" href="/llms.txt" />',
     // Performance: imagem do hero (LCP) e conexão antecipada com o GTM
-    '<link rel="preload" as="image" type="image/webp" href="/images/hero-1920.webp" imagesrcset="/images/hero-960.webp 960w, /images/hero-1920.webp 1920w" imagesizes="100vw" fetchpriority="high" />',
-    (site.analytics.gtmId || site.analytics.gaId) && '<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />',
-    `<script type="application/ld+json">${jsonLd}</script>`,
-    analyticsHead(),
+    page.preloadHero && '<link rel="preload" as="image" type="image/webp" href="/images/hero-1920.webp" imagesrcset="/images/hero-960.webp 960w, /images/hero-1920.webp 1920w" imagesizes="100vw" fetchpriority="high" />',
+    jsonLd && `<script type="application/ld+json">${jsonLd}</script>`,
   ]
   return tags.filter(Boolean).join('\n    ')
 }

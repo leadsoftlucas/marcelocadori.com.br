@@ -39,6 +39,7 @@ export const site = {
     mapsQuery: (env.VITE_MAPS_QUERY || '').trim(),
   },
   hasAddress: Boolean(city),
+  privacyPath: '/politica-de-privacidade/',
   hours: {
     schema: (env.VITE_OPENING_HOURS_SCHEMA || '').trim(),
     text: (env.VITE_OPENING_HOURS_TEXT || '').trim(),
@@ -69,6 +70,10 @@ export const site = {
     const streetHasCity = Boolean(a.street && a.city && a.street.toLowerCase().includes(a.city.toLowerCase()))
     const cityState = streetHasCity ? '' : [a.city, a.state].filter(Boolean).join(' - ')
     return [a.street, cityState, a.zip].filter(Boolean).join(', ')
+  },
+  /** Há GTM/GA configurado? (só então existem banner de cookies e eventos de analytics) */
+  get analyticsEnabled() {
+    return Boolean(this.analytics.gtmId || this.analytics.gaId)
   },
   get place() {
     return city ? (state ? `${city}/${state}` : city) : ''

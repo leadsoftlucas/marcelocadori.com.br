@@ -16,3 +16,6 @@
 .footer__credit img { width: 20px; height: 20px; filter: brightness(0) invert(1); } /* λ azul → branco, legível sobre o azul do rodapé */
 .footer__credit a { color: #fff; text-underline-offset: 3px; }
 .footer__credit a:hover { text-decoration-thickness: 2px; }
+
+.footer__linkbtn { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+.footer__linkbtn:hover { text-decoration: underline; }
