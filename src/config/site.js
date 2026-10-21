@@ -16,6 +16,10 @@ const state = (env.VITE_ADDRESS_STATE || '').trim()
 export const site = {
   name: 'Marcelo Cadori',
   businessType: 'Oficina mecânica, lataria e pintura',
+  // Dados cadastrais (Receita Federal): identificam o responsável na política de privacidade e no rodapé
+  legalName: (env.VITE_LEGAL_NAME || '').trim(),
+  cnpj: (env.VITE_CNPJ || '').trim(),
+  foundingDate: (env.VITE_FOUNDING_DATE || '').trim(), // AAAA-MM-DD
   url: (env.VITE_SITE_URL || 'https://marcelocadori.com.br').replace(/\/$/, ''),
   locale: 'pt_BR',
   lang: 'pt-BR',
@@ -74,6 +78,10 @@ export const site = {
   /** Há GTM/GA configurado? (só então existem banner de cookies e eventos de analytics) */
   get analyticsEnabled() {
     return Boolean(this.analytics.gtmId || this.analytics.gaId)
+  },
+  /** Ano de fundação (a partir de VITE_FOUNDING_DATE=AAAA-MM-DD), ou '' */
+  get foundingYear() {
+    return /^\d{4}-\d{2}-\d{2}$/.test(this.foundingDate) ? this.foundingDate.slice(0, 4) : ''
   },
   get place() {
     return city ? (state ? `${city}/${state}` : city) : ''

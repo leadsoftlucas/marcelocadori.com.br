@@ -9,7 +9,9 @@ export function buildPrivacy(site) {
       id: 'quem-somos',
       title: 'Quem é o responsável',
       paragraphs: [
-        `O responsável pelo tratamento dos dados (controlador) é ${site.name}, mecânico${where}.`,
+        site.legalName
+          ? `O responsável pelo tratamento dos dados (controlador) é ${site.legalName}${site.cnpj ? `, inscrita no CNPJ sob o nº ${site.cnpj}` : ''}, responsável por este site de ${site.name}${where}.`
+          : `O responsável pelo tratamento dos dados (controlador) é ${site.name}, mecânico${where}.`,
       ],
     },
     {

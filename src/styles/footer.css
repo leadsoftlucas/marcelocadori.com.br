@@ -19,3 +19,5 @@
 
 .footer__linkbtn { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
 .footer__linkbtn:hover { text-decoration: underline; }
+
+.footer__legal { margin: 0.25rem 0 0; font-size: 0.8rem; opacity: 0.65; }

@@ -32,6 +32,9 @@ jobs:
           VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
           VITE_WHATSAPP_NUMBER: ${{ vars.VITE_WHATSAPP_NUMBER }}
           VITE_EMAIL: ${{ vars.VITE_EMAIL }}
+          VITE_LEGAL_NAME: ${{ vars.VITE_LEGAL_NAME }}
+          VITE_CNPJ: ${{ vars.VITE_CNPJ }}
+          VITE_FOUNDING_DATE: ${{ vars.VITE_FOUNDING_DATE }}
           VITE_INSTAGRAM_URL: ${{ vars.VITE_INSTAGRAM_URL }}
           VITE_FACEBOOK_URL: ${{ vars.VITE_FACEBOOK_URL }}
           VITE_ADDRESS_STREET: ${{ vars.VITE_ADDRESS_STREET }}

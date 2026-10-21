@@ -88,6 +88,8 @@ const contact = [
   site.hasAddress && `- Endereço: ${site.addressLine}`,
   site.hours.text && `- Horário: ${site.hours.text}`,
   site.email && `- E-mail: ${site.email}`,
+  site.legalName && `- Razão social: ${site.legalName}${site.cnpj ? ` (CNPJ ${site.cnpj})` : ''}`,
+  site.foundingYear && `- Em atividade desde ${site.foundingYear}`,
   site.social.instagram && `- Instagram: ${site.social.instagram}`,
   site.social.facebook && `- Facebook: ${site.social.facebook}`,
   site.address.mapsUrl && `- Google Maps: ${site.address.mapsUrl}`,

@@ -56,6 +56,7 @@ Copie `.env.example` para `.env` (ignorado pelo Git) para desenvolvimento local.
 | `VITE_MAPS_URL` / `VITE_MAPS_QUERY` | Link do Google Maps e busca do mapa embutido (mostra nota e avaliações) |
 | `VITE_OPENING_HOURS_SCHEMA` / `_TEXT` | Horário (schema.org e texto legível) |
 | `VITE_EMAIL`, `VITE_INSTAGRAM_URL`, `VITE_FACEBOOK_URL` | Contato e redes (`sameAs`) |
+| `VITE_LEGAL_NAME`, `VITE_CNPJ`, `VITE_FOUNDING_DATE` | Razão social, CNPJ e data de fundação (rodapé, política de privacidade, JSON-LD) |
 | `VITE_GTM_ID` / `VITE_GA_ID` | Google Tag Manager (recomendado) ou GA4 direto |
 | `VITE_GSC_VERIFICATION` / `VITE_BING_VERIFICATION` | Verificação de propriedade (Search Console / Bing) |
 

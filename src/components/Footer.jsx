@@ -26,7 +26,15 @@ export default function Footer({ base = '' }) {
           )}
         </nav>
         <div className="footer__bottom">
-          <p className="footer__copy" suppressHydrationWarning>© {year} {site.name}. Todos os direitos reservados.</p>
+          <div>
+            <p className="footer__copy" suppressHydrationWarning>© {year} {site.name}. Todos os direitos reservados.</p>
+            {site.legalName && (
+              <p className="footer__legal">
+                {site.legalName}
+                {site.cnpj && ` · CNPJ ${site.cnpj}`}
+              </p>
+            )}
+          </div>
           <p className="footer__credit">
             <img src="/images/leadsoft.png" alt="Logotipo da LeadSoft Soluções Web" title="LeadSoft Soluções Web" width="20" height="20" loading="lazy" />
             <span>
