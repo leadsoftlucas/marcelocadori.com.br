@@ -1,0 +1,35 @@
+/* "#" ao lado dos títulos: link direto. Aparece ao passar o mouse/focar; no toque fica discreto. */
+.anchor {
+  position: relative;
+  margin-left: 0.4em;
+  font-weight: 400;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.anchor-heading:hover .anchor,
+.anchor:focus-visible { opacity: 0.6; }
+.anchor:hover { opacity: 1; }
+/* área de toque ampliada (≥ 44px) sem alterar o layout do título */
+.anchor::before { content: ''; position: absolute; inset: -14px -12px; }
+@media (hover: none) { .anchor { opacity: 0.35; } }
+
+.anchor[data-copied]::after {
+  content: 'Link copiado';
+  position: absolute;
+  left: 50%;
+  bottom: 135%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  background: var(--ink);
+  color: #fff;
+  font: 600 0.75rem/1.2 var(--font-body);
+  white-space: nowrap;
+  opacity: 1;
+}
+
+/* No FAQ o "#" fica dentro do <summary>: não deve empurrar o "+" */
+.faq__item summary .anchor { margin-left: 0.5em; font-size: 0.95em; }
+.faq__item summary > span:first-child { display: inline; }

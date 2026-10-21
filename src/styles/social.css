@@ -1,0 +1,38 @@
+/* Ícones de redes/contato (hero, novidades, como chegar, rodapé) */
+.social { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.social a:hover { transform: translateY(-2px); }
+
+/* Header: ícones compactos, só em telas largas (no celular ficam no rodapé) */
+.social--header { display: none; color: #fff; gap: 0.35rem; }
+.social--header a { min-width: 38px; height: 38px; padding: 0; border: 0; }
+.social--header a:hover { background: rgba(255, 255, 255, 0.18); }
+@media (min-width: 900px) { .social--header { display: flex; } }
+
+.social--card { margin-top: 1.1rem; color: var(--blue-600); }
+.social--card a:hover { background: var(--blue-600); color: #fff; }
+
+.social--footer { color: #fff; }
+.social--footer a { border-color: rgba(255, 255, 255, 0.35); }
+.social--footer a:hover { background: #fff; color: var(--blue-900); }
+
+/* Endereço com link para o Maps (Como chegar e rodapé) */
+.address { display: flex; align-items: flex-start; gap: 0.65rem; margin: 0; font-weight: 500; line-height: 1.5; }
+.address svg { flex-shrink: 0; margin-top: 0.15rem; color: #bcd0ff; }
+.address a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.45); text-underline-offset: 4px; }
+.address a:hover { text-decoration-color: #fff; }
+.location__address { font-size: 1.1rem; }

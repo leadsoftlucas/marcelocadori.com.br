@@ -1,0 +1,17 @@
+node_modules/
+dist/
+dist-server/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Arquivos de marca/fontes editáveis nunca entram no repositório público
+*.psd
+*.ai
+*.mp4
+*.pptx
+*.zip

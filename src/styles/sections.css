@@ -1,0 +1,6 @@
+/* Como funciona */
+.steps { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.steps__item { padding: 1.5rem 1.25rem; border-radius: var(--radius); background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.22); }
+.steps__num { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #fff; color: var(--blue-600); font: 800 1.1rem var(--font-display); margin-bottom: 1rem; }
+.steps__item h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.steps__item p { margin: 0; font-size: 0.97rem; color: rgba(255, 255, 255, 0.88); }

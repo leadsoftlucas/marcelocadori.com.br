@@ -1,0 +1,63 @@
+name: Deploy no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build (pré-renderização + SEO)
+        run: npm run build
+        env:
+          # Configure em: Settings > Secrets and variables > Actions > Variables
+          # (dados do negócio ficam fora do código do repositório público)
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
+          VITE_WHATSAPP_NUMBER: ${{ vars.VITE_WHATSAPP_NUMBER }}
+          VITE_EMAIL: ${{ vars.VITE_EMAIL }}
+          VITE_INSTAGRAM_URL: ${{ vars.VITE_INSTAGRAM_URL }}
+          VITE_FACEBOOK_URL: ${{ vars.VITE_FACEBOOK_URL }}
+          VITE_ADDRESS_STREET: ${{ vars.VITE_ADDRESS_STREET }}
+          VITE_ADDRESS_CITY: ${{ vars.VITE_ADDRESS_CITY }}
+          VITE_ADDRESS_STATE: ${{ vars.VITE_ADDRESS_STATE }}
+          VITE_ADDRESS_ZIP: ${{ vars.VITE_ADDRESS_ZIP }}
+          VITE_GEO_LAT: ${{ vars.VITE_GEO_LAT }}
+          VITE_GEO_LNG: ${{ vars.VITE_GEO_LNG }}
+          VITE_MAPS_URL: ${{ vars.VITE_MAPS_URL }}
+          VITE_MAPS_QUERY: ${{ vars.VITE_MAPS_QUERY }}
+          VITE_OPENING_HOURS_SCHEMA: ${{ vars.VITE_OPENING_HOURS_SCHEMA }}
+          VITE_OPENING_HOURS_TEXT: ${{ vars.VITE_OPENING_HOURS_TEXT }}
+          VITE_GTM_ID: ${{ vars.VITE_GTM_ID }}
+          VITE_GA_ID: ${{ vars.VITE_GA_ID }}
+          VITE_GSC_VERIFICATION: ${{ vars.VITE_GSC_VERIFICATION }}
+          VITE_BING_VERIFICATION: ${{ vars.VITE_BING_VERIFICATION }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

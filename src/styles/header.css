@@ -1,0 +1,8 @@
+.header { position: sticky; top: 0; z-index: 50; background: var(--blue-600); color: #fff; box-shadow: 0 2px 14px rgba(0, 26, 92, 0.35); }
+.header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: var(--header-h); }
+.header__brand { display: inline-flex; align-items: center; min-height: 44px; }
+.header__brand img { height: 30px; width: auto; }
+.header__nav { display: none; gap: 1.75rem; margin-left: auto; font-weight: 600; font-size: 0.95rem; }
+.header__nav a { text-decoration: none; opacity: 0.9; }
+.header__nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 6px; }
+@media (min-width: 900px) { .header__nav { display: flex; } }

@@ -1,0 +1,18 @@
+.faqnews { display: grid; gap: 2rem; align-items: start; }
+@media (min-width: 960px) { .faqnews { grid-template-columns: 1.7fr 1fr; } }
+
+.faq { display: grid; gap: 0.75rem; }
+.faq__item { border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); }
+.faq__item[open] { border-color: var(--blue-600); }
+.faq__item summary { cursor: pointer; list-style: none; padding: 1.1rem 1.25rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after { content: '+'; font-size: 1.5rem; line-height: 1; color: var(--blue-600); flex-shrink: 0; transition: transform 0.2s; }
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item p { margin: 0; padding: 0 1.25rem 1.25rem; color: var(--ink-soft); }
+
+.news { padding: 1.6rem; position: sticky; top: calc(var(--header-h) + 1rem); }
+.news h3 { font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--blue-600); }
+.news p { color: var(--ink-soft); margin: 0; }
+.news__list { display: grid; gap: 1.1rem; }
+.news__list time { display: block; font-size: 0.8rem; color: var(--ink-soft); }
+.news__list p { font-size: 0.95rem; margin-top: 0.2rem; }

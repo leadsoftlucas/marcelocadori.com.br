@@ -1,0 +1,29 @@
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+
+.section { padding-block: var(--section-y); }
+.section--light { background: var(--paper); }
+.section--soft { background: var(--paper-soft); }
+.section--blue { background: var(--blue-600); color: #fff; }
+.section--blue .section__intro { color: rgba(255, 255, 255, 0.85); }
+.section__head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3.25rem); }
+.section__title { font-size: clamp(1.75rem, 4.2vw, 2.6rem); }
+.section__intro { margin-top: 1rem; font-size: 1.125rem; color: var(--ink-soft); }
+.section__cta { margin-top: 2.5rem; display: flex; justify-content: center; }
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+}
+.section--blue .eyebrow,
+.eyebrow--light { color: #bcd0ff; }
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.25rem; }
+.chips li { padding: 0.35rem 0.85rem; border-radius: 999px; background: var(--blue-100); color: var(--blue-700); font-size: 0.95rem; font-weight: 600; }
