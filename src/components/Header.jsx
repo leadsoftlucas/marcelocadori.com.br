@@ -14,7 +14,7 @@ export default function Header({ base = '' }) {
     <header className="header">
       <div className="container header__inner">
         <a className="header__brand" href={`${base}#topo`} aria-label="Marcelo Cadori — início" title="Marcelo Cadori: voltar ao topo da página">
-          <img src="/images/logo-branco.webp" alt="Logotipo Marcelo Cadori, mecânica, lataria e pintura" title="Marcelo Cadori" width="640" height="126" />
+          <img src="/images/logo-branco-320.webp" alt="Logotipo Marcelo Cadori, mecânica, lataria e pintura" title="Marcelo Cadori" width="320" height="63" />
         </a>
         <nav className="header__nav" aria-label="Principal">
           {links.map((l) => (

@@ -14,6 +14,7 @@ Site institucional estático de **Marcelo Cadori**, mecânico: oficina de **mec�
 - **LGPD:** aviso de cookies (Aceitar/Recusar) e página `/politica-de-privacidade/`. O GTM/GA só é carregado depois do aceite do visitante, então não há cookies nem scripts do Google antes disso.
 - **Analytics:** Google Tag Manager (ou GA4 direto) e eventos de conversão (`whatsapp_click`, `section_view`…).
 - **Performance e acessibilidade:** imagens WebP com dimensões, fontes auto-hospedadas, CSS de poucos KB, HTML semântico, sem dependências de terceiros em tempo de execução além do GTM.
+- **Lighthouse:** buscamos 100 nas quatro categorias (desempenho, acessibilidade, boas práticas e SEO). Veja a seção [Qualidade e Lighthouse](#qualidade-e-lighthouse).
 - **Sem dados sensíveis no repositório:** telefone, endereço e IDs de analytics entram por variáveis de ambiente.
 
 ## Estrutura
@@ -74,6 +75,16 @@ Copie `.env.example` para `.env` (ignorado pelo Git) para desenvolvimento local.
 - **Search Console:** adicione a propriedade, verifique por DNS (TXT) ou pela meta tag (`VITE_GSC_VERIFICATION`), envie `https://marcelocadori.com.br/sitemap.xml` e solicite a indexação da home.
 - **Tag Manager:** informe `VITE_GTM_ID`, configure o GA4 dentro do GTM e use os eventos `whatsapp_click`, `service_details`, `section_view`, `maps_click`, `reviews_click`, `instagram_click`, `facebook_click` e `email_click` (parâmetros `location` e `section`).
 - Para rastrear outro elemento: `data-track="nome_do_evento" data-track-location="onde"`.
+
+## Qualidade e Lighthouse
+
+Cuidamos do relatório do Google Lighthouse a cada mudança relevante: rodar no site publicado (desktop e mobile) e corrigir tudo o que sair abaixo de 100. O que já está aplicado:
+
+- **Contraste (WCAG AA):** texto branco sobre o verde do WhatsApp usa `#168443` (razão acima de 4,5:1). Ao mudar cores em `src/styles/tokens.css`, confira o contraste.
+- **Imagens responsivas:** cada foto tem versões menores (`-480`, `-640`, `-320`) e `srcset`/`sizes`, para o celular não baixar a imagem grande. Elas são geradas por `Ferramentas/gerar-ativos-web.py`. A imagem do topo (LCP) não é lazy.
+- **CSS embutido:** o pré-render (`scripts/prerender.mjs`) coloca o CSS dentro do HTML de cada página, sem requisição que bloqueie a renderização.
+- **`llms.txt` com links:** contatos e páginas saem como links em Markdown, como recomenda o padrão llmstxt.org.
+- **Limite conhecido:** o GitHub Pages usa cache de 10 minutos e não aceita cabeçalhos próprios. Para cache longo, use Cloudflare na frente (ver [Cabeçalhos HTTP](#cabeçalhos-http)).
 
 ## Cabeçalhos HTTP
 

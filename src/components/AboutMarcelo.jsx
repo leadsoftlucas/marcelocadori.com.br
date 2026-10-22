@@ -10,7 +10,7 @@ export default function AboutMarcelo() {
       <div className="about__grid">
         <figure className="about__media" data-reveal="left">
           <div className="about__frame">
-            <img data-parallax="0.08" src={photo.src} width={photo.width} height={photo.height} alt={photo.alt} title="Atendimento com confiança e transparência" loading="lazy" decoding="async" />
+            <img data-parallax="0.08" src={photo.src.replace('-1200.', '-640.')} srcSet={`${photo.src.replace('-1200.', '-640.')} 640w, ${photo.src} 1200w`} sizes="(max-width: 900px) 92vw, 560px" width={photo.width} height={photo.height} alt={photo.alt} title="Atendimento com confiança e transparência" loading="lazy" decoding="async" />
           </div>
           <figcaption className="about__impact">{marcelo.impact}</figcaption>
         </figure>

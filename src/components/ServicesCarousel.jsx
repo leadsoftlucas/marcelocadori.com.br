@@ -46,7 +46,7 @@ export default function ServicesCarousel() {
         <ul className="carousel__track" ref={track} onScroll={update} tabIndex={0}>
           {services.map((s) => (
             <li key={s.id} className="slide card" id={`servico-${s.id}`}>
-              <img className="slide__img" src={s.image.src} width={s.image.width} height={s.image.height} alt={s.image.alt} title={s.title} loading="lazy" decoding="async" />
+              <img className="slide__img" src={s.image.src.replace('-900.', '-480.')} srcSet={`${s.image.src.replace('-900.', '-480.')} 480w, ${s.image.src} 900w`} sizes="(max-width: 420px) 84vw, 340px" width={s.image.width} height={s.image.height} alt={s.image.alt} title={s.title} loading="lazy" decoding="async" />
               <div className="slide__body">
                 <Heading as="h3" href={`servico-${s.id}`} className="slide__title">{s.title}</Heading>
                 <p className="slide__summary">{s.summary}</p>
