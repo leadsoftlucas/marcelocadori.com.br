@@ -83,6 +83,7 @@ Cuidamos do relatório do Google Lighthouse a cada mudança relevante: rodar no 
 - **Contraste (WCAG AA):** texto branco sobre o verde do WhatsApp usa `#168443` (razão acima de 4,5:1). Ao mudar cores em `src/styles/tokens.css`, confira o contraste.
 - **Imagens responsivas:** cada foto tem versões menores (`-480`, `-640`, `-320`) e `srcset`/`sizes`, para o celular não baixar a imagem grande. Elas são geradas por `Ferramentas/gerar-ativos-web.py`. A imagem do topo (LCP) não é lazy.
 - **CSS embutido:** o pré-render (`scripts/prerender.mjs`) coloca o CSS dentro do HTML de cada página, sem requisição que bloqueie a renderização.
+- **Sem layout shift (CLS) no celular:** as fontes latinas são pré-carregadas e usam `font-display: optional`, então o texto não muda de tamanho quando a fonte chega (o aviso de cookies e o título do topo pulavam, CLS 0,19). Feito no pré-render.
 - **`llms.txt` com links:** contatos e páginas saem como links em Markdown, como recomenda o padrão llmstxt.org.
 - **Limite conhecido:** o GitHub Pages usa cache de 10 minutos e não aceita cabeçalhos próprios. Para cache longo, use Cloudflare na frente (ver [Cabeçalhos HTTP](#cabeçalhos-http)).
 

@@ -22,7 +22,11 @@ async function inlineStyles(html) {
   const links = [...html.matchAll(/<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/g)]
   for (const [tag, href] of links) {
     if (!cssCache.has(href)) cssCache.set(href, await readFile(resolve(root, 'dist', href.slice(1)), 'utf8'))
-    html = html.replace(tag, () => `<style>${cssCache.get(href)}</style>`)
+    // font-display: optional + preload das fontes latinas = sem troca de fonte, logo sem layout shift (CLS)
+    const css = cssCache.get(href).replaceAll('font-display:swap', 'font-display:optional')
+    const fonts = [...css.matchAll(/url\((\/assets\/(?:inter|archivo)-latin-(?:wght|wdth)-normal-[^)]+\.woff2)\)/g)].map((m) => m[1])
+    const preload = fonts.map((f) => `<link rel="preload" href="${f}" as="font" type="font/woff2" crossorigin>`).join('')
+    html = html.replace(tag, () => `${preload}<style>${css}</style>`)
   }
   return html
 }
